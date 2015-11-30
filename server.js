@@ -27,7 +27,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 mongoose.connect(
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
-  'mongodb://localhost/YOUR_LOCAL_DATABASE_NAME'
+  'mongodb://localhost/project-01'
 );
 
 // require Comment and User models
@@ -150,17 +150,17 @@ app.get('/profile', function (req, res) {
   }
 });
 
-app.get('/auth/github', passport.authenticate('github'), function (req, res) {
-  // the request will be redirected to github for authentication,
-  // so this function will not be called
-});
+// app.get('/auth/github', passport.authenticate('github'), function (req, res) {
+//   // the request will be redirected to github for authentication,
+//   // so this function will not be called
+// });
 
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
-  function (req, res) {
-    console.log(req.user);
-    res.redirect('/profile');
-  }
-);
+// app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
+//   function (req, res) {
+//     console.log(req.user);
+//     res.redirect('/profile');
+//   }
+// );
 
 
 // API ROUTES
