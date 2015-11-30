@@ -1,0 +1,22 @@
+{{> header}}
+
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Welcome, {{user.username}}!</h2>
+        <p>This is your profile page.</p>
+        <hr>
+        {{#each user.posts}}
+          <p><strong>{{title}}</strong> - {{description}}</p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  
+  <!-- jquery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
