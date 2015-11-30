@@ -23,11 +23,12 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/photPlace-app');
+mongoose.connect('mongodb://localhost/project-01');
 
-// require Post and User models
-var PhotoComment = require('./models/photoComment'),
-    User = require('./models/user');
+// require Comment and User models
+var Comment = require('./models/comment'),
+    User = require('./models/user'),
+    Photo = require('./models/photo');
 
 // middleware for auth
 app.use(cookieParser());
@@ -48,26 +49,26 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // passport-github config
-passport.use(new GitHubStrategy({
-  clientID: oauth.github.clientID,
-  clientSecret: oauth.github.clientSecret,
-  callbackURL: oauth.github.callbackURL
-}, function (accessToken, refreshToken, profile, done) {
-  User.findOne({ oauthID: profile.id }, function (err, foundUser) {
-    if (foundUser) {
-      done(null, foundUser);
-    } else {
-      var newUser = new User({
-        oauthID: profile.id,
-        username: profile.username
-      });
-      newUser.save(function (err, savedUser) {
-        console.log('saving user...');
-        done(null, savedUser);
-      });
-    }
-  });
-}));
+// passport.use(new GitHubStrategy({
+//   clientID: oauth.github.clientID,
+//   clientSecret: oauth.github.clientSecret,
+//   callbackURL: oauth.github.callbackURL
+// }, function (accessToken, refreshToken, profile, done) {
+//   User.findOne({ oauthID: profile.id }, function (err, foundUser) {
+//     if (foundUser) {
+//       done(null, foundUser);
+//     } else {
+//       var newUser = new User({
+//         oauthID: profile.id,
+//         username: profile.username
+//       });
+//       newUser.save(function (err, savedUser) {
+//         console.log('saving user...');
+//         done(null, savedUser);
+//       });
+//     }
+//   });
+// }));
 
 // HOMEPAGE ROUTE
 
@@ -159,21 +160,100 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
 
 // API ROUTES
 
-// get all posts
-app.get('/api/photoComment', function (req, res) {
-  // find all posts in db
-  PhotoComment.find(function (err, allPhotoComments) {
+// get all photos
+app.get('/api/photos', function (req, res) {
+  // find all photos in db
+  Photo.find(function (err, allPhotos) {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
-      res.json({ posts: allPhotoComments });
+      res.json({photos: allPhotos});
     }
   });
 });
 
 
+// create new photo
+app.post('/api/photos', function (req, res) {
+  
+  var newPhoto = new Photo(req.body);
 
-    // listen on port 3000
-app.listen(3000, function() {
+  // save new photo in db
+  newPhoto.save(function (err, savedPhoto) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+     
+      res.json(savedPhoto);
+    }
+  });
+});
+
+// // get one post
+// app.get('/api/photoComment/:id', function (req, res) {
+//   // get post id from url params (`req.params`)
+//   var photoCommentId = req.params.id;
+
+//   // find post in db by id
+//   PhotoComment.findOne({ _id: postId }, function (err, foundPhotoComment) {
+//     if (err) {
+//       if (err.name === "CastError") {
+//         res.status(404).json({ error: "Nothing found by this ID." });
+//       } else {
+//         res.status(500).json({ error: err.message });
+//       }
+//     } else {
+//       res.json(foundPost);
+//     }
+//   });
+// });
+
+// // update post
+// app.put('/api/photoComment/:id', function (req, res) {
+//   // get post id from url params (`req.params`)
+//   var postId = req.params.id;
+
+//   // find post in db by id
+//   Post.findOne({ _id: postId }, function (err, foundPhotoComment) {
+//     if (err) {
+//       res.status(500).json({ error: err.message });
+//     } else {
+//       // update the posts's attributes
+//       foundPhotoComment.title = req.body.title;
+//       foundPhotoComment.description = req.body.description;
+
+//       // save updated post in db
+//       foundPhotoComment.save(function (err, savedPhotoComment) {
+//         if (err) {
+//           res.status(500).json({ error: err.message });
+//         } else {
+//           res.json(savedPost);
+//         }
+//       });
+//     }
+//   });
+// });
+
+// // delete post
+// app.delete('/api/photoComment/:id', function (req, res) {
+//   // get post id from url params (`req.params`)
+//   var photoCommentId = req.params.id;
+
+//   // find post in db by id and remove
+//   PhotoComment.findOneAndRemove({ _id: postId }, function (err, deletedPhotoComment) {
+//     if (err) {
+//       res.status(500).json({ error: err.message });
+//     } else {
+//       res.json(deletedPost);
+//     }
+//   });
+// });
+
+
+
+
+
+    // listen on heroku or port 3000
+app.listen(process.env.PORT || 3000, function() {
   console.log('server started');
 });
