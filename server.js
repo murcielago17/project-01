@@ -23,7 +23,12 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/project-01');
+// mongoose.connect('mongodb://localhost/project-01');
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/YOUR_LOCAL_DATABASE_NAME'
+);
 
 // require Comment and User models
 var Comment = require('./models/comment'),
