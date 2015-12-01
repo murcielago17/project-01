@@ -1,3 +1,30 @@
+body {
+  background-color: black;
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.grid-item { 
+  width: 250px;
+  border-radius: 20px;
+}
+.grid-item--width2 { 
+  width: 400px;
+  border-radius: 20px;
+}
+
+
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 30%; }
+.grid-item--width2 { width: 40%; }
+
+/* 2 columns */
+/*.grid-item--width2 { width: 40%; }*/
+
+
 
 h1, h2 {
   margin-top: 40px;

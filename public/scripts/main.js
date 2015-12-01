@@ -2,7 +2,7 @@
 $(function() {
 
   // base API route
-  var baseUrl = '/api/photoComments';
+  var baseUrl = '/api/comments';
 
   // array to hold post data from API
   var allPosts = [];
@@ -40,7 +40,6 @@ $(function() {
     // render all posts to view
     render();
   });
-
   // listen for submit even on form
   $createpost.on('submit', function (event) {
     event.preventDefault();
@@ -82,7 +81,7 @@ $(function() {
       // serialze form data
       var updatedpost = $(this).serialize();
 
-      // PUT request to update post
+      // PUT request to update comment
       $.ajax({
         type: 'PUT',
         url: baseUrl + '/' + postId,
