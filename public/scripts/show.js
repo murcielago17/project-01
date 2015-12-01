@@ -1,7 +1,13 @@
+
+// This JS will handle the inputs in the page
+// that displays the single image >> Comments + Map
+
+
+// For Comments in the blog:
 // wait for DOM to load before running JS
 $(function() {
 
-  // base API route
+  // base API route for comments
   var baseUrl = '/api/comments';
 
   // array to hold post data from API

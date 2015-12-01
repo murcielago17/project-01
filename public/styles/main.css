@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  /*background-color: black;*/
   padding-top: 50px;
 }
 .starter-template {
@@ -24,6 +24,9 @@ body {
 /* 2 columns */
 /*.grid-item--width2 { width: 40%; }*/
 
+.comment-visual-aid {
+  color: red;
+}
 
 
 h1, h2 {

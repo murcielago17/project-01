@@ -1,6 +1,8 @@
 
 {{> header}}
 
+
+
   <!-- header -->
   <div class="well">
     <div class="container">
@@ -10,79 +12,71 @@
     </div>
   </div>
 
-<!-- Display 5 images below -->
+<!-- Display images below -->
+
+<!-- <div> "Images will load from here... </div>
+<br><br><br><br><br><br><br><br>
+<p class="comment-visual-aid">(Handlebars Template Here)</p>
+<br><br><br><br><br><br><br><br> -->
+
+<!-- Here insert Handlebars Template for loadin images from database -->
+<div id="photos-list"></div>
+ <script id="photos-template" type="text/x-handlebars-template">
+  \{{#each photos}}
+    <div class="grid">
+    <img class="grid-item" src="\{{imageUrl}}">
+    </div>
 
 
 
 
-
-
-
-  <!-- page content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+    <li class="list-group-item photo" data-id="\{{_id}}">
+      <!-- photo label (title) -->
+      <span class="label label-default">\{{title}}</span>
+      
+      <!-- photo description -->
+      \{{description}}
+      <div class="pull-right">
+        <!-- pencil icon to toggle update form -->
+        <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
         
-        <!-- new post form-->
-        <form class="form-inline" id="create-post">
+        <!-- trash can icon to delete photo -->
+         <a href="javascript:void(0)" class="delete-photo">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+      </div>
+      
+      <!-- form to update photo -->
+      <div class="collapse" id="update-\{{_id}}">
+        <br>
+        <form class="form-inline update-photo">
           <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
+            <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
           </div>
           <div class="form-group">
-            <input type="text" name="description" class="form-control" placeholder="Description">
+            <input type="text" name="description" class="form-control" placeholder="Description" value="\{{description}}">
           </div>
           <div class="form-group">
-            <input type="submit" class="btn btn-default" value="Add Post">
+            <input type="submit" class="btn btn-block btn-default" value="Update">
           </div>
         </form>
-        <br>
-
-        <!-- list of posts -->
-        <ul class="list-group" id="posts-list">
-          
-          <!-- handlebars template -->
-          <script id="posts-template" type="text/x-handlebars-template">
-            \{{#each Comment}}
-              <li class="list-group-item post" data-id="\{{_id}}">
-                // <!-- post label (title) -->
-                <span class="label label-default">\{{title}}</span>
-                
-                // <!-- post description -->
-                \{{description}}
-                <div class="pull-right">
-                  // <!-- pencil icon to toggle update form -->
-                  <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  </a>
-                  
-                  // <!-- trash can icon to delete post -->
-                   <a href="javascript:void(0)" class="delete-post">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </a>
-                </div>
-                
-                // <!-- form to update post -->
-                <div class="collapse" id="update-\{{_id}}">
-                  <br>
-                  <form class="form-inline update-post">
-                    <div class="form-group">
-                      <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="description" class="form-control" placeholder="Description" value="\{{description}}">
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-block btn-default" value="Update">
-                    </div>
-                  </form>
-                </div>
-              </li>
-            \{{/each}}
-          </script>
-        </ul>
       </div>
-    </div>
-  </div>
+    </li>
+  \{{/each}}
+</script>
+
+
+
+
+
+
+<div>"                      ... to here"----</div>
+
+
+
+
   
   <!-- jquery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -96,9 +90,8 @@
   <!-- Here Masonry library cdn -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
 
-  <script type="text/javascript" src="main.js"></script>
 
   <!-- custom script -->
-  <script type="text/javascript" src="scripts/main.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
 </body>
 </html>
