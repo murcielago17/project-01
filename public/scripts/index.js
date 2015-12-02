@@ -29,9 +29,7 @@ $(function() {
   var render = function() {
     // empty existing photos from view
     $photosList.empty();
-
-    // pass `allphotos` into the template function
-    var photosHtml = template({ photos: allPhotos });
+     var photosHtml = template({ photos: allPhotos });
     console.log(photosHtml);
     // append html to the view
     $photosList.append(photosHtml);

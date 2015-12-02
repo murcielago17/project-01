@@ -57,12 +57,12 @@
   <div class="well">
     <div class="container">
       <div class="page-header">
-        <h1 class="test-class">Photo Places <small>Where can I take this pictures?</small></h1>
+        <h1>Photo Places <small>Where can I take this pictures?</small></h1>
       </div>
     </div>
   </div>
 
-<!-- single image bellow -->
+
 
 
 
@@ -74,10 +74,21 @@
     <div class="row">
       <div class="col-md-12">
         
-
+        <!-- single image bellow -->
   
         <img class="single-photo" src="{{photo.imageUrl}}">
+        <br><br>
+        <div class="map-container">
+    <!-- version 1 from embededgooglemaps.com -->
         
+
+          <!-- test for scroll theme layover --> 
+          <!-- <img class="top" width="700" height="500" src=http://i.imgur.com/xgVFbzE.png> -->
+
+          <iframe class="bottom" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="600" height="450" src="https://maps.google.com/maps?hl=en&q={{photo.location}}&ie=UTF8&t=roadmap&z=11&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://buyproxies.io/">buyproxies.io</a></small></div></iframe>
+        </div>
+    
+         <br><br>    
 
         <!-- new post form-->
         <form class="form-inline" id="create-post">
