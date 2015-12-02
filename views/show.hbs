@@ -1,10 +1,63 @@
-{{> header}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- set viewport to device width to make site responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap css -->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+
+  <title>Photo Place App</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">PhotoPlace</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/">All Comments</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{#if user}}
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          {{else}}
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/login">Log In</a></li>
+          {{/if}}
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  {{#if errorMessage}}
+    <div class="alert alert-danger">
+      <div class="container">{{errorMessage}}</div>
+    </div>
+  {{/if}}
 
   <!-- header -->
   <div class="well">
     <div class="container">
       <div class="page-header">
-        <h1>Photo Places <small>Where can I take this pictures?</small></h1>
+        <h1 class="test-class">Photo Places <small>Where can I take this pictures?</small></h1>
       </div>
     </div>
   </div>
@@ -13,8 +66,7 @@
 
 
 
-  <div>Single image will display here once clicked on index page</div>
-
+ 
 
 
   <!-- page content -->
@@ -22,6 +74,11 @@
     <div class="row">
       <div class="col-md-12">
         
+
+  
+        <img class="single-photo" src="{{photo.imageUrl}}">
+        
+
         <!-- new post form-->
         <form class="form-inline" id="create-post">
           <div class="form-group">
@@ -37,7 +94,7 @@
         <br>
 
         <!-- list of posts -->
-        <ul class="list-group" id="posts-list">
+        <ul class="list-group"  id="posts-list">
           
           <!-- handlebars template -->
           <script id="posts-template" type="text/x-handlebars-template">
@@ -95,7 +152,6 @@
   <!-- Here Masonry library cdn -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
 
-  <script type="text/javascript" src="show.js"></script>
 
   <!-- custom script -->
   <script type="text/javascript" src="scripts/show.js"></script>

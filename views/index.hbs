@@ -12,19 +12,18 @@
     </div>
   </div>
 
-<!-- Display images below -->
 
-<!-- <div> "Images will load from here... </div>
-<br><br><br><br><br><br><br><br>
-<p class="comment-visual-aid">(Handlebars Template Here)</p>
-<br><br><br><br><br><br><br><br> -->
 
 <!-- Here insert Handlebars Template for loadin images from database -->
 <div id="photos-list"></div>
  <script id="photos-template" type="text/x-handlebars-template">
   \{{#each photos}}
     <div class="grid">
-    <img class="grid-item" src="\{{imageUrl}}">
+
+    <a href="/photos/\{{_id}}">
+      <img class="grid-item" src="\{{imageUrl}}">
+    </a>
+
     </div>
 
 
@@ -69,10 +68,6 @@
 
 
 
-
-
-
-<div>"                      ... to here"----</div>
 
 
 

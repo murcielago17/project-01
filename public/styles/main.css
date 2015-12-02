@@ -24,6 +24,17 @@ body {
 /* 2 columns */
 /*.grid-item--width2 { width: 40%; }*/
 
+.test-class{
+color: purple;
+
+}
+.single-photo {
+  max-width: 1000px;
+  border-radius: 30px;
+
+
+}
+
 .comment-visual-aid {
   color: red;
 }

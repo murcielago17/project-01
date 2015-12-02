@@ -194,7 +194,30 @@ app.post('/api/photos', function (req, res) {
   });
 });
 
-// // get one post
+// to open that photo in own show.hbs once clicked
+app.get('/photos/:id', function (req, res) {
+    
+  // get photo id from url
+  var photoId = req.params.id;
+  // find in mongo db photo using id
+  Photo.findOne({_id:photoId}, function(err, foundPhoto){
+      // render show.hbs
+      res.render('show', { photo: foundPhoto });
+  });
+
+    
+
+});
+
+
+
+
+
+
+
+
+
+// // get one Comment
 // app.get('/api/photoComment/:id', function (req, res) {
 //   // get post id from url params (`req.params`)
 //   var photoCommentId = req.params.id;
