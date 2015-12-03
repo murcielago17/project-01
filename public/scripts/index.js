@@ -6,6 +6,7 @@
 // For Photos from database:
 // wait for DOM to load before running JS
 $(function() {
+  console.log('js works');
 
   // base API route for comments
   var baseUrl = '/api/photos';

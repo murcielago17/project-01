@@ -7,61 +7,38 @@
 // wait for DOM to load before running JS
 $(function() {
 
-  // base API route for comments
-  var baseUrl = '/api/comments';
-
-  // array to hold post data from API
-  var allPosts = [];
+ // compile handlebars template
+  var source = $('#single-photo-template').html();
+  var template = Handlebars.compile(source);
+  console.log(source);
 
   // element to display list of posts
   var $postsList = $('#posts-list');
 
   // form to create new post
   var $createpost = $('#create-post');
+  // get one photo (has comments inside) on page load
 
-  // compile handlebars template
-  var source = $('#posts-template').html();
-  var template = Handlebars.compile(source);
 
   // helper function to render all posts to view
   // note: we empty and re-render the collection each time our post data changes
-  var render = function() {
-    // empty existing posts from view
-    $postsList.empty();
+  
 
-    // pass `allPosts` into the template function
-    var postsHtml = template({ posts: allPosts });
-
-    // append html to the view
-    $postsList.append(postsHtml);
-  };
-
-  // GET all posts on page load
-  $.get(baseUrl, function (data) {
-    console.log(data);
-
-    // set `allPosts` to post data from API
-    allPosts = data.posts;
-
-    // render all posts to view
-    render();
-  });
-  // listen for submit even on form
+  // listen for submit event-handlers on form
   $createpost.on('submit', function (event) {
+    var photoId = $(this).attr('data-id');
+
     event.preventDefault();
 
     // serialze form data
-    var newpost = $(this).serialize();
+    var newPost = $(this).serialize();
 
     // POST request to create new post
-    $.post(baseUrl, newpost, function (data) {
+    $.post('/api/photos/'+photoId+'/comments', newPost, function (data) {
       console.log(data);
-
-      // add new post to `allPosts`
-      allPosts.push(data);
-
-      // render all posts to view
-      render();
+      var commentHtml = template(data);
+      $postsList.append(commentHtml);
+      
     });
 
     // reset the form

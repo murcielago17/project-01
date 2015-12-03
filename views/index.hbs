@@ -18,50 +18,10 @@
  <script id="photos-template" type="text/x-handlebars-template">
   \{{#each photos}}
     <div class="grid">
-
-    <a href="/photos/\{{_id}}">
-      <img class="grid-item" src="\{{imageUrl}}">
-    </a>
-
+      <a href="/photos/\{{_id}}">
+        <img class="grid-item" src="\{{imageUrl}}">
+      </a>
     </div>
-
-
-
-
-    <li class="list-group-item photo" data-id="\{{_id}}">
-      <!-- photo label (title) -->
-      <span class="label label-default">\{{title}}</span>
-      
-      <!-- photo description -->
-      \{{description}}
-      <div class="pull-right">
-        <!-- pencil icon to toggle update form -->
-        <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </a>
-        
-        <!-- trash can icon to delete photo -->
-         <a href="javascript:void(0)" class="delete-photo">
-          <span class="glyphicon glyphicon-trash"></span>
-        </a>
-      </div>
-      
-      <!-- form to update photo -->
-      <div class="collapse" id="update-\{{_id}}">
-        <br>
-        <form class="form-inline update-photo">
-          <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
-          </div>
-          <div class="form-group">
-            <input type="text" name="description" class="form-control" placeholder="Description" value="\{{description}}">
-          </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-block btn-default" value="Update">
-          </div>
-        </form>
-      </div>
-    </li>
   \{{/each}}
 </script>
 

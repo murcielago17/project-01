@@ -83,6 +83,10 @@ app.get('/', function (req, res) {
   res.render('index', { user: req.user });
 });
 
+app.get('/photos-:id', function (req, res){
+
+  res.render('show', {user: req.user});
+});
 
 // AUTH ROUTES
 
@@ -200,17 +204,59 @@ app.get('/photos/:id', function (req, res) {
   // get photo id from url
   var photoId = req.params.id;
   // find in mongo db photo using id
-  Photo.findOne({_id:photoId}, function(err, foundPhoto){
-      // render show.hbs
-      res.render('show', { photo: foundPhoto });
-  });
+  Photo.findOne({_id:photoId})
+      // populate the comments before we render show.hbs
+      .populate('comments')
+      .exec(function(err, foundPhoto){
+        // now render show.hbs
+          console.log(foundPhoto);
 
-    
-
+        res.render('show', { photo: foundPhoto });
+      });
+  
 });
 
+// to get the photo with populated comments and 
+// send the json of foundPhoto to render in client side w/hndl brs
+app.get('/photos/:id', function (req, res) {
+    
+  // get photo id from url
+  var photoId = req.params.id;
+  // find in mongo db photo using id
+  Photo.findOne({_id:photoId})
+      // populate the comments before sending object
+      .populate('comments')
+      .exec(function(err, foundPhoto){
+        // now send json of foundPhoto
+          res.json(foundPhoto);
+
+        
+      });
+  
+});
+
+// to post a Comment
+app.post('/api/photos/:id/comments', function (req, res){
+
+  // get photo id from url
+  var photoId = req.params.id;
+
+  // make the new comment
+  var newComment = new Comment(req.body);
+  newComment.save(function(err, savedComment){
+    // find in mongo db photo using id
+    Photo.findOne({_id:photoId}, function (err, foundPhoto){
+      foundPhoto.comments.push(savedComment);
+      foundPhoto.save(function (err, savedPhoto){
+        res.json(savedComment);
+      });
 
 
+      });
+  });
+  
+
+});
 
 
 

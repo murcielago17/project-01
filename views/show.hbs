@@ -1,57 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-
-  <!-- set viewport to device width to make site responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- bootstrap css -->
-  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-  <!-- custom styles -->
-  <link rel="stylesheet" type="text/css" href="/styles/main.css">
-
-  <title>Photo Place App</title>
-</head>
-<body>
-
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">PhotoPlace</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="/">All Comments</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          {{#if user}}
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout">Log Out</a></li>
-          {{else}}
-            <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/login">Log In</a></li>
-          {{/if}}
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  {{#if errorMessage}}
-    <div class="alert alert-danger">
-      <div class="container">{{errorMessage}}</div>
-    </div>
-  {{/if}}
+{{> header}}
 
   <!-- header -->
   <div class="well">
@@ -78,79 +25,115 @@
   
         <img class="single-photo" src="{{photo.imageUrl}}">
         <br><br>
-        <div class="map-container">
-    <!-- version 1 from embededgooglemaps.com -->
         
-
-          <!-- test for scroll theme layover --> 
-          <!-- <img class="top" width="700" height="500" src=http://i.imgur.com/xgVFbzE.png> -->
-
-          <iframe class="bottom" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="600" height="450" src="https://maps.google.com/maps?hl=en&q={{photo.location}}&ie=UTF8&t=roadmap&z=11&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://buyproxies.io/">buyproxies.io</a></small></div></iframe>
-        </div>
-    
-         <br><br>    
+  
 
         <!-- new post form-->
-        <form class="form-inline" id="create-post">
+        <form class="form-inline" data-id="{{photo._id}}" id="create-post">
           <div class="form-group">
             <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
           </div>
+          
           <div class="form-group">
             <input type="text" name="description" class="form-control" placeholder="Description">
           </div>
           <div class="form-group">
             <input type="submit" class="btn btn-default" value="Add Post">
+
+
           </div>
         </form>
         <br>
+    </div>
+  </div>
+    <!-- list of comments -->
+    <!-- The style of the post it note -->
 
-        <!-- list of posts -->
-        <ul class="list-group"  id="posts-list">
-          
-          <!-- handlebars template -->
-          <script id="posts-template" type="text/x-handlebars-template">
-            \{{#each Comment}}
-              <li class="list-group-item post" data-id="\{{_id}}">
-                // <!-- post label (title) -->
-                <span class="label label-default">\{{title}}</span>
-                
-                // <!-- post description -->
-                \{{description}}
-                <div class="pull-right">
-                  // <!-- pencil icon to toggle update form -->
-                  <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  </a>
-                  
-                  // <!-- trash can icon to delete post -->
-                   <a href="javascript:void(0)" class="delete-post">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </a>
-                </div>
-                
-                // <!-- form to update post -->
-                <div class="collapse" id="update-\{{_id}}">
-                  <br>
-                  <form class="form-inline update-post">
-                    <div class="form-group">
-                      <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="description" class="form-control" placeholder="Description" value="\{{description}}">
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-block btn-default" value="Update">
-                    </div>
-                  </form>
-                </div>
-              </li>
-            \{{/each}}
-          </script>
-        </ul>
-      </div>
+  <div class="row">
+    <div class="col-md-12" id="posts-list">
+      {{#each photo.comments}}
+        <!-- <div class="post-it-note"> -->
+          <h1>{{title}}</h1>
+          <p class="description">{{description}}</p>
+          <div class="pull-right">
+             <!-- pencil icon to toggle update form -->
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            
+             <!-- trash can icon to delete post -->
+             <a href="javascript:void(0)" class="delete-post">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+
+          <div class="collapse" id="update-{{_id}}">
+            <br>
+            <form class="form-inline update-post">
+              <div class="form-group">
+                <input type="text" name="title" class="form-control" placeholder="Title" value="{{title}}">
+              </div>
+              <div class="form-group">
+                <input type="text" name="description" class="form-control" placeholder="Description" value="{{description}}">
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-block btn-default" value="Update">
+              </div>
+            </form>
+          </div>
+       <!--  </div> -->
+      {{/each}} 
+   <!--    client template -->  
+  <script type="text/x-handlebars-template" id="single-photo-template">
+    <h1>\{{title}}</h1>
+          <p class="description">\{{description}}</p>
+          <div class="pull-right">
+             <!-- pencil icon to toggle update form -->
+            <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            
+             <!-- trash can icon to delete post -->
+             <a href="javascript:void(0)" class="delete-post">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+
+          <div class="collapse" id="update-\{{_id}}">
+            <br>
+            <form class="form-inline update-post">
+              <div class="form-group">
+                <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
+              </div>
+              <div class="form-group">
+                <input type="text" name="description" class="form-control" placeholder="Description" value="\{{description}}">
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-block btn-default" value="Update">
+              </div>
+            </form>
+          </div>
+  </script>
     </div>
   </div>
   
+  <div class="row">
+    <div class="col-md-12">
+    <!-- Place Google Map -->
+      <div class="map-container">
+  <!-- version 1 from embededgooglemaps.com -->
+      
+
+        <!-- test for scroll theme layover --> 
+      <!--   <img class="top" width="700" height="500" src=http://i.imgur.com/xgVFbzE.png> -->
+
+        <iframe class="bottom" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="600" height="400" src="https://maps.google.com/maps?hl=en&q={{photo.location}}&ie=UTF8&t=roadmap&z=11&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://buyproxies.io/">buyproxies.io</a></small></div></iframe>
+      </div>
+    </div>
+  </div>
+
+</div>  <!-- end of container -->
+
   <!-- jquery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
@@ -165,6 +148,6 @@
 
 
   <!-- custom script -->
-  <script type="text/javascript" src="scripts/show.js"></script>
+  <script type="text/javascript" src="/scripts/show.js"></script>
 </body>
 </html>

@@ -38,21 +38,23 @@ color: purple;
 /*.comment-visual-aid {
   color: red;
 }*/
-.map-container { position: relative; }
+.map-container { 
+  position: relative; 
+  margin-left: 400px;
+}
 
-.map-container .top {
+/*.map-container .top {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   width: 460px;
-}
+}*/
 .map-container .bottom {
   padding-right: 100px;
   padding-left: 100px;
-  padding-top: 50px;
+  padding-top: 2px;
   padding-bottom: 50px;
-  border-radius: 50px;
 }
 
 h1, h2 {
@@ -74,4 +76,46 @@ h1, h2 {
 }
 label.error {
   color: red;
+}
+.title{
+  font: Impact;
+  color: blue;
+}
+
+.description{
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size::;px;
+  color: #000;
+  width:300px;
+  height:200px;
+}
+
+.post-it-note{
+  background: rgb(255,255,136); /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(255,255,136,1) 77%, rgba(255,255,214,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(77%,rgba(255,255,136,1)), color-stop(100%,rgba(255,255,214,1))); /*Chrome,Safari4+*/
+  background: -webkit-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* IE10+ */
+  background: linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  padding:15px;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size:15px;
+  color: #000;
+  width:300px;
+  height:200px;
+  /*position: fixed; top: 50%; left: 50%; margin-top: -100px; margin-left: -150px;
+  */-moz-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  -o-transform: rotate(7deg);
+  -ms-transform: rotate(7deg);
+  transform: rotate(7deg);
+  box-shadow: 0px 4px 6px #333;
+  -moz-box-shadow: 0px 4px 6px #333;
+  -webkit-box-shadow: 0px 4px 6px #333;
+  -webkit-border-bottom-right-radius: 60px 5px;
+  -moz-border-bottom-right-radius: 60px 5px;
+  -o-border-bottom-right-radius: 60px 5px;
+  z-index:2 !important; 
 }
