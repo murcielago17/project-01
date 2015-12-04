@@ -1,36 +1,25 @@
 
 {{> header}}
 
-
-
   <!-- header -->
   <div class="well">
-    <div class="container">
-      <div class="page-header">
-        <h1>Photo Places <small>Where can I take this pictures?</small></h1>
-      </div>
+    <div class="container">  
+      <h1>PHOTO PLACES <br>San Francisco</h1>
+      <small>click on images</small>
     </div>
   </div>
-
 
 <!-- Here insert Handlebars Template for loadin images from database -->
 <div id="photos-list"></div>
  <script id="photos-template" type="text/x-handlebars-template">
   \{{#each photos}}
-    <div class="grid">
+    <div class="grid-sizer">
       <a href="/photos/\{{_id}}">
         <img class="grid-item" src="\{{imageUrl}}">
       </a>
     </div>
   \{{/each}}
 </script>
-
-
-
-
-
-
-
   
   <!-- jquery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

@@ -53,27 +53,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// passport-github config
-// passport.use(new GitHubStrategy({
-//   clientID: oauth.github.clientID,
-//   clientSecret: oauth.github.clientSecret,
-//   callbackURL: oauth.github.callbackURL
-// }, function (accessToken, refreshToken, profile, done) {
-//   User.findOne({ oauthID: profile.id }, function (err, foundUser) {
-//     if (foundUser) {
-//       done(null, foundUser);
-//     } else {
-//       var newUser = new User({
-//         oauthID: profile.id,
-//         username: profile.username
-//       });
-//       newUser.save(function (err, savedUser) {
-//         console.log('saving user...');
-//         done(null, savedUser);
-//       });
-//     }
-//   });
-// }));
 
 // HOMEPAGE ROUTE
 
@@ -116,11 +95,10 @@ app.post('/signup', function (req, res) {
         } else {
           passport.authenticate('local')(req, res, function () {
             res.redirect('/profile');
-          });
-        }
-      }
-    );
-  }
+            });
+          }
+        });
+    }
 });
 
 // show login view
@@ -153,19 +131,6 @@ app.get('/profile', function (req, res) {
     res.redirect('/login');
   }
 });
-
-// app.get('/auth/github', passport.authenticate('github'), function (req, res) {
-//   // the request will be redirected to github for authentication,
-//   // so this function will not be called
-// });
-
-// app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
-//   function (req, res) {
-//     console.log(req.user);
-//     res.redirect('/profile');
-//   }
-// );
-
 
 // API ROUTES
 
@@ -229,10 +194,7 @@ app.get('/photos/:id', function (req, res) {
       .exec(function(err, foundPhoto){
         // now send json of foundPhoto
           res.json(foundPhoto);
-
-        
       });
-  
 });
 
 // to post a Comment
@@ -250,12 +212,8 @@ app.post('/api/photos/:id/comments', function (req, res){
       foundPhoto.save(function (err, savedPhoto){
         res.json(savedComment);
       });
-
-
-      });
+    });
   });
-  
-
 });
 
 

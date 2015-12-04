@@ -4,43 +4,26 @@
   <div class="well">
     <div class="container">
       <div class="page-header">
-        <h1>Photo Places <small>Where can I take this pictures?</small></h1>
+        <h2>{{photo.title}}</h2>
       </div>
     </div>
   </div>
-
-
-
-
-
- 
-
-
   <!-- page content -->
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        
+      <div class="col-lg-12">
         <!-- single image bellow -->
-  
         <img class="single-photo" src="{{photo.imageUrl}}">
-        <br><br>
-        
-  
-
         <!-- new post form-->
         <form class="form-inline" data-id="{{photo._id}}" id="create-post">
           <div class="form-group">
             <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
           </div>
-          
           <div class="form-group">
             <input type="text" name="description" class="form-control" placeholder="Description">
           </div>
           <div class="form-group">
             <input type="submit" class="btn btn-default" value="Add Post">
-
-
           </div>
         </form>
         <br>
@@ -48,11 +31,10 @@
   </div>
     <!-- list of comments -->
     <!-- The style of the post it note -->
-
   <div class="row">
-    <div class="col-md-12" id="posts-list">
+    <div class="col-sm-6" id="posts-list">
       {{#each photo.comments}}
-        <!-- <div class="post-it-note"> -->
+        <div class="post-it-note">
           <h1>{{title}}</h1>
           <p class="description">{{description}}</p>
           <div class="pull-right">
@@ -60,7 +42,6 @@
             <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
               <span class="glyphicon glyphicon-pencil"></span>
             </a>
-            
              <!-- trash can icon to delete post -->
              <a href="javascript:void(0)" class="delete-post">
               <span class="glyphicon glyphicon-trash"></span>
@@ -81,26 +62,25 @@
               </div>
             </form>
           </div>
-       <!--  </div> -->
+        </div>
       {{/each}} 
    <!--    client template -->  
   <script type="text/x-handlebars-template" id="single-photo-template">
     <h1>\{{title}}</h1>
           <p class="description">\{{description}}</p>
           <div class="pull-right">
-             <!-- pencil icon to toggle update form -->
+              <!-- pencil icon to toggle update form -->
             <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-\{{_id}}">
               <span class="glyphicon glyphicon-pencil"></span>
             </a>
-            
-             <!-- trash can icon to delete post -->
+              <!-- trash can icon to delete post -->
              <a href="javascript:void(0)" class="delete-post">
               <span class="glyphicon glyphicon-trash"></span>
             </a>
           </div>
 
           <div class="collapse" id="update-\{{_id}}">
-            <br>
+           
             <form class="form-inline update-post">
               <div class="form-group">
                 <input type="text" name="title" class="form-control" placeholder="Title" value="\{{title}}">
@@ -115,23 +95,17 @@
           </div>
   </script>
     </div>
-  </div>
-  
+
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
     <!-- Place Google Map -->
-      <div class="map-container">
-  <!-- version 1 from embededgooglemaps.com -->
-      
-
-        <!-- test for scroll theme layover --> 
-      <!--   <img class="top" width="700" height="500" src=http://i.imgur.com/xgVFbzE.png> -->
-
-        <iframe class="bottom" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="600" height="400" src="https://maps.google.com/maps?hl=en&q={{photo.location}}&ie=UTF8&t=roadmap&z=11&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://buyproxies.io/">buyproxies.io</a></small></div></iframe>
-      </div>
+        <iframe class="top" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="600" height="400" src="https://maps.google.com/maps?hl=en&q={{photo.location}}&ie=UTF8&t=roadmap&z=11&iwloc=B&output=embed">
+          <div>
+            <small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://buyproxies.io/">buyproxies.io</a></small>
+          </div>
+        </iframe>
     </div>
   </div>
-
 </div>  <!-- end of container -->
 
   <!-- jquery -->

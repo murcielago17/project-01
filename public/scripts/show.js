@@ -67,7 +67,7 @@ $(function() {
       // PUT request to update comment
       $.ajax({
         type: 'PUT',
-        url: baseUrl + '/' + postId,
+        url: '/api/photos/'+photoId+'/comments'+ postId,
         data: updatedpost,
         success: function(data) {
           // replace post to update with newly updated version (data)
