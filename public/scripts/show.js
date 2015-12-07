@@ -54,7 +54,7 @@ $(function() {
       event.preventDefault();
       
       // find the post's id (stored in HTML as `data-id`)
-      var postId = $(this).closest('.post').attr('data-id');
+      var postId = $(this).attr('data-id');
 
       // find the post to update by its id
       var postToUpdate = allPosts.filter(function (post) {
